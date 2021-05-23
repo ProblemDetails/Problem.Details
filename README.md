@@ -50,4 +50,4 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseProblemDetails();
 ```
 
-Check [sample the project](/Sample.WebApi).
+Check [sample the project](/ProblemDetails/Sample.WebApi).
