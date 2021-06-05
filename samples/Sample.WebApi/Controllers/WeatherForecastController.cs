@@ -1,44 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using ProblemDetails;
 
 namespace Sample.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [ProducesResponseType(typeof(Details), 500)]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
-        }
-
+        [ProducesResponseType(typeof(IEnumerable<WeatherForecast>), 200)]
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            => new List<WeatherForecast>
+            {
+                new()
                 {
-                    Date = DateTime.Now.AddDays(index),
-                    TemperatureC = rng.Next(-20, 55),
-                    Summary = Summaries[rng.Next(Summaries.Length)]
-                })
-                .ToArray();
-        }
-        
+                    Date = new DateTime(2019, 10, 10),
+                    Summary = "First",
+                    TemperatureC = 1
+                },
+                new()
+                {
+                    Date = new DateTime(2020, 11, 11),
+                    Summary = "Second",
+                    TemperatureC = 1
+                },
+                new()
+                {
+                    Date = new DateTime(2021, 12, 12),
+                    Summary = "Third",
+                    TemperatureC = 3
+                }
+            };
+
+
+        /// <summary>
+        /// Throws 500 Internal Server error
+        /// </summary>
         [HttpGet("{id:int}")]
         public WeatherForecast Get(int id) => throw new Exception("Testing 500");
 
+        /// <summary>
+        /// Throws 400 Bad Request on empty body
+        /// </summary>
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ValidationDetails), 400)]
         [HttpPost]
         public IActionResult Post([FromBody] SampleRequest request) => Ok();
     }

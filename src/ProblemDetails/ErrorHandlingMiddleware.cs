@@ -27,20 +27,20 @@ namespace ProblemDetails
             {
                 ValidationDetails details = new(StatusCodes.Status400BadRequest, ex.FieldErrors, jsonOptions);
                 await HandleProblemAsync(context, HttpStatusCode.BadRequest, details.ToJson());
+                return;
             }
             catch (Exception ex) //TODO: dev error details
             {
                 logger.LogError(ex, "Exception handled");
                 Details details = new(StatusCodes.Status500InternalServerError);
                 await HandleProblemAsync(context, HttpStatusCode.InternalServerError, details.ToJson());
+                return;
             }
-            finally
+
+            if (context.Response.StatusCode > 400)
             {
-                if (context.Response.StatusCode > 400)
-                {
-                    Details details = new(context.Response.StatusCode);
-                    await HandleProblemAsync(context, context.Response.StatusCode, details.ToJson());
-                }
+                Details details = new(context.Response.StatusCode);
+                await HandleProblemAsync(context, context.Response.StatusCode, details.ToJson());
             }
         }
 
