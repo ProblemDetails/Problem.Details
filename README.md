@@ -1,5 +1,7 @@
 # ProblemDetails
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ProblemDetails_ProblemDetails&metric=alert_status)](https://sonarcloud.io/dashboard?id=ProblemDetails_ProblemDetails)
+
 ## Problem
 
 By default the MVC Core framework doesn't return consistent error responses accross different statuses.
