@@ -1,11 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>9.0</LangVersion>
+        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyName>ProblemDetails</AssemblyName>
+        <PackageId>ProblemDetails</PackageId>
+        <PackageProjectUrl>https://github.com/ProblemDetails/ProblemDetails</PackageProjectUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PackageIcon>icon.png</PackageIcon>
+        <Summary>Consistent error details responses for ASP.NET core.</Summary>
+        <Description>Consistent error details responses for ASP.NET core.</Description>
+        <Authors>Hannes Karask</Authors>
+        <Title>Consistent error details responses for ASP.NET core.</Title>
+        <PackageTags>JSON Output ProblemDetails Validation Error Exception Handler</PackageTags>
+        <RepositoryType>git</RepositoryType>
+        <Copyright>Copyright (c) Hannes Karask 2021</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="..\..\icon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

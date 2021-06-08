@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace ProblemDetails
@@ -14,7 +14,7 @@ namespace ProblemDetails
         {
             Errors = errors.ToDictionary(
                 kvp => 
-                    jsonOptions?.Value?.SerializerOptions.PropertyNamingPolicy?.ConvertName(kvp.Key) ?? kvp.Key,
+                    jsonOptions?.Value?.JsonSerializerOptions.PropertyNamingPolicy?.ConvertName(kvp.Key) ?? kvp.Key,
                 kvp => kvp.Value
             );
         }

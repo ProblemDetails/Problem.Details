@@ -6,8 +6,12 @@ namespace ProblemDetails
     {
         public static string ToJson(this object obj)
         {
-            return JsonSerializer.Serialize(obj,
-                new JsonSerializerOptions(JsonSerializerDefaults.Web));
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+            
+            return JsonSerializer.Serialize(obj, options);
         }
     }
 }

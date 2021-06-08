@@ -18,6 +18,6 @@ namespace ProblemDetails
 
         public string Title => StatusToTitle.ContainsKey(Status) ? StatusToTitle[Status] : $"Error {Status}";
         
-        public int Status { get; init; }
+        public int Status { get; set; }
     }
 }
