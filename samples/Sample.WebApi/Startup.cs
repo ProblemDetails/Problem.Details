@@ -31,7 +31,9 @@ namespace Sample.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddProblemDetails();
+            services.AddProblemDetails()
+                .MapStatusToTitle(500, "500, Oops!");
+            
             services.AddControllers(options =>
                 {
                     options.ReturnHttpNotAcceptable = true;

@@ -7,9 +7,18 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ProblemDetails
 {
+    public class ConfigureProblemDetails
+    {
+        public ConfigureProblemDetails MapStatusToTitle(int statusCode, string title)
+        {
+            Details.MapStatusToTitle(statusCode, title);
+            return this;
+        }
+    }
+    
     public static class StartupExtensions
     {
-        public static void AddProblemDetails(this IServiceCollection services)
+        public static ConfigureProblemDetails AddProblemDetails(this IServiceCollection services)
         {
             services.AddControllers(options =>
                 {
@@ -29,6 +38,7 @@ namespace ProblemDetails
                 });
             
             services.TryAddSingleton<ProblemDetailsMarkerService, ProblemDetailsMarkerService>();
+            return new ConfigureProblemDetails();
         }
         
         public static IApplicationBuilder UseProblemDetails(this IApplicationBuilder app)
