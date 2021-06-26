@@ -57,3 +57,4 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ```
 
 Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi).
+
