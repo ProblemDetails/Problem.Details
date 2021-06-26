@@ -9,8 +9,9 @@ By default, the ASP.NET MVC Core framework doesn't return consistent error respo
 
 ## Solution
 
-By calling few extension method you can fix that. All response codes `> 400` will have a nice JSON response, ex:
+All response codes above `400` will have a nice JSON response, for example:
 
+### Status `404`
 ```json
 {
   "type": "https://httpstatuses.com/404",
@@ -19,6 +20,7 @@ By calling few extension method you can fix that. All response codes `> 400` wil
 }
 ```
 
+### Status `400` (note that field names are camel-cased)
 ```json
 {
   "errors": {
@@ -30,6 +32,7 @@ By calling few extension method you can fix that. All response codes `> 400` wil
 }
 ```
 
+### Status `500`
 ```json
 {
   "type": "https://httpstatuses.com/500",
@@ -37,6 +40,8 @@ By calling few extension method you can fix that. All response codes `> 400` wil
   "status": 500
 }
 ```
+
+You can also **override** the title values
 
 ## Getting started
 
