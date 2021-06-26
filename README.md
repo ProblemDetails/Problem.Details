@@ -5,7 +5,7 @@
 
 ## Problem
 
-By default, the ASP.NET MVC Core framework doesn't return consistent error responses across different statuses. For example, the framework will return a status 500 with an empty body when encountering an internal server error.  On the other hand, model validation errors will send back a JSON body, but the field names don't follow the casing rules. This package is meant to unify the responses.
+By default, the ASP.NET MVC Core framework doesn't return consistent error responses across different statuses. For example, the framework will return a status 500 with an empty body when encountering an internal server error.  Model validation errors will send back a JSON body, but the field names don't follow the casing rules. This package is meant to unify the responses.
 
 ## Solution
 
