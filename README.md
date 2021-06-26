@@ -1,7 +1,10 @@
 # ProblemDetails
 
+[![Build](https://github.com/ProblemDetails/ProblemDetails/actions/workflows/build.yml/badge.svg)](https://github.com/ProblemDetails/ProblemDetails/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ProblemDetails_ProblemDetails&metric=alert_status)](https://sonarcloud.io/dashboard?id=ProblemDetails_ProblemDetails)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ProblemDetails_ProblemDetails&metric=coverage)](https://sonarcloud.io/dashboard?id=ProblemDetails_ProblemDetails)
+[![NuGet](https://img.shields.io/nuget/vpre/ProblemDetails.svg)](https://www.nuget.org/packages/ProblemDetails) 
+
 
 ## Problem
 
