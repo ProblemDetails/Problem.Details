@@ -20,7 +20,7 @@ All response codes above `400` will have a nice JSON response, for example:
 }
 ```
 
-### Status `400` (note that field names are camel-cased)
+### Status `400` (note that the field names are camel-cased)
 ```json
 {
   "errors": {
@@ -44,8 +44,16 @@ All response codes above `400` will have a nice JSON response, for example:
 You can also **override** the title values
 
 ## Getting started
+1. Install the [package](https://www.nuget.org/packages/ProblemDetails)
+```sh
+Install-Package ProblemDetails
+```
+Or via the .NET Core command line interface:
+```sh
+dotnet add package ProblemDetails
+```
 
-1. Call `services.AddProblemDetails()` in services configure method:
+2. Call `services.AddProblemDetails()` in services configure method:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -54,7 +62,7 @@ public void ConfigureServices(IServiceCollection services)
       .MapStatusToTitle(500, "500, Oops!"); // optional overrides
 ```
 
-2. Call `app.UseProblemDetails()` in app Configure method:
+3. Call `app.UseProblemDetails()` in app Configure method:
 
 ```c#
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,5 +70,5 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseProblemDetails();
 ```
 
-Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi).
+Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi) or browse [source](https://github.com/ProblemDetails/ProblemDetails) 
 
