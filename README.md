@@ -56,4 +56,4 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseProblemDetails();
 ```
 
-Check the [sample project](/ProblemDetails/Sample.WebApi).
+Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi).
