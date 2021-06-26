@@ -30,7 +30,9 @@ namespace ProblemDetails.IntegrationTests
             // Assert
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
             await response.BodyShouldBeAsync(
-                "[{\"Date\":\"2019-10-10T00:00:00\",\"TemperatureC\":1,\"TemperatureF\":33,\"Summary\":\"First\"},{\"Date\":\"2020-11-11T00:00:00\",\"TemperatureC\":1,\"TemperatureF\":33,\"Summary\":\"Second\"},{\"Date\":\"2021-12-12T00:00:00\",\"TemperatureC\":3,\"TemperatureF\":37,\"Summary\":\"Third\"}]");
+                "[{\"date\":\"2019-10-10T00:00:00\",\"temperatureC\":1,\"temperatureF\":33,\"summary\":\"First\"}," +
+                "{\"date\":\"2020-11-11T00:00:00\",\"temperatureC\":1,\"temperatureF\":33,\"summary\":\"Second\"}," +
+                "{\"date\":\"2021-12-12T00:00:00\",\"temperatureC\":3,\"temperatureF\":37,\"summary\":\"Third\"}]");
         }
         
         [Fact]
