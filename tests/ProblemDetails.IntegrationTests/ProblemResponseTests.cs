@@ -61,7 +61,7 @@ namespace ProblemDetails.IntegrationTests
             // Assert
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
             await response.BodyShouldBeAsync(
-                "{\"errors\":{\"requiredField\":[\"The RequiredField field is required.\"]},\"type\":\"https://httpstatuses.com/400\",\"title\":\"One or more validation errors occurred.\",\"status\":400}"
+                "{\"errors\":{\"requiredField\":[\"The requiredField field is required.\"]},\"type\":\"https://httpstatuses.com/400\",\"title\":\"One or more validation errors occurred.\",\"status\":400}"
             );
         }
 
@@ -92,7 +92,7 @@ namespace ProblemDetails.IntegrationTests
             // Assert
             response.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
             await response.BodyShouldBeAsync(
-                "{\"type\":\"https://httpstatuses.com/500\",\"title\":\"Error 500\",\"status\":500}");
+                "{\"type\":\"https://httpstatuses.com/500\",\"title\":\"500, Oops!\",\"status\":500}");
         }
     }
 }

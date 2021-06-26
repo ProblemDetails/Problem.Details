@@ -12,11 +12,17 @@ namespace ProblemDetails
             Dictionary<string, IEnumerable<string>> errors,
             IOptions<JsonOptions> jsonOptions) : base(status)
         {
-            Errors = errors.ToDictionary(
-                kvp => 
-                    jsonOptions?.Value?.JsonSerializerOptions.PropertyNamingPolicy?.ConvertName(kvp.Key) ?? kvp.Key,
-                kvp => kvp.Value
-            );
+            var propNamingPolicy = jsonOptions?.Value?.JsonSerializerOptions.PropertyNamingPolicy;
+
+            Errors = new Dictionary<string, IEnumerable<string>>();
+            foreach (var kvp in errors)
+            {
+                var convertedKey = propNamingPolicy?.ConvertName(kvp.Key) ?? kvp.Key;
+                var adjustedMessages = kvp.Value
+                    .Select(v => v.Replace($" {kvp.Key} ", $" {convertedKey} "));
+                
+                Errors.Add(convertedKey, adjustedMessages);
+            }
         }
 
         public Dictionary<string, IEnumerable<string>> Errors { get; }

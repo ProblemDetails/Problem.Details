@@ -22,7 +22,7 @@ By calling few extension method you can fix that. All response codes `> 400` wil
 ```json
 {
   "errors": {
-    "requiredField": ["The RequiredField field is required."]
+    "requiredField": ["The requiredField field is required."]
   },
   "type": "https://httpstatuses.com/400",
   "title": "One or more validation errors occurred.",
@@ -45,7 +45,8 @@ By calling few extension method you can fix that. All response codes `> 400` wil
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddProblemDetails();
+    services.AddProblemDetails()
+      .MapStatusToTitle(500, "500, Oops!"); // optional overrides
 ```
 
 2. Call `app.UseProblemDetails()` in app Configure method:
