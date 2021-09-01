@@ -23,13 +23,8 @@ namespace ProblemDetails
         
         public int Status { get; set; }
 
-        public static void MapStatusToTitle(int statusCode, string title)
-        {
-            if (StatusToTitleMappings.ContainsKey(statusCode)) 
-                StatusToTitleMappings[statusCode] = title;
-            else
-                StatusToTitleMappings.Add(statusCode, title);
-
-        }
+        public static void MapStatusToTitle(int statusCode, string title) =>
+            StatusToTitleMappings[statusCode] = title;
+        
     }
 }
