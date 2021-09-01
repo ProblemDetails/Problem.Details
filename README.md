@@ -14,7 +14,7 @@ By default, the ASP.NET MVC Core framework doesn't return consistent error respo
 
 All response codes above `400` will have a nice JSON response, for example:
 
-### Status `404`
+### Status `404` Not Found
 ```json
 {
   "type": "https://httpstatuses.com/404",
@@ -23,7 +23,7 @@ All response codes above `400` will have a nice JSON response, for example:
 }
 ```
 
-### Status `400` (note that the field names are camel-cased)
+### Status `400` Bad Request (note that the field names are camel-cased)
 ```json
 {
   "errors": {
@@ -35,7 +35,7 @@ All response codes above `400` will have a nice JSON response, for example:
 }
 ```
 
-### Status `500`
+### Status `500` Internal Server Error
 ```json
 {
   "type": "https://httpstatuses.com/500",
