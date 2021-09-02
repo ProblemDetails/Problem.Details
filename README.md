@@ -72,12 +72,13 @@ public void ConfigureServices(IServiceCollection services)
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     app.UseProblemDetails(configure => configure
-        // Optional configuration
+        // Optional: Override title for Bad Request
         .MapStatusToTitle(HttpStatusCode.BadRequest, "One or more validation errors occurred")
+        // Optional: Map your custom exception
         .MapException<NotFoundException>(HttpStatusCode.NotFound)
+        // Optional: Show detailed error
         .ShowErrorDetails(env.IsDevelopment())
     );
 ```
 
 Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi) or browse [source](https://github.com/ProblemDetails/ProblemDetails) 
-

@@ -1,7 +1,12 @@
 {
   "name": "problem-details",
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Consistent error detail responses for ASP.NET core.",
   "repository": {
     "type": "git",
