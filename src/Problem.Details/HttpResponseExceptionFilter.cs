@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ProblemDetails
+namespace Problem.Details
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {

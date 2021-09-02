@@ -18,7 +18,7 @@ All response codes above `400` will have a nice JSON response, for example:
 ```json
 {
   "type": "https://httpstatuses.com/404",
-  "title": "Error 404",
+  "title": "Error: Not Found",
   "status": 404
 }
 ```
@@ -30,7 +30,7 @@ All response codes above `400` will have a nice JSON response, for example:
     "requiredField": ["The requiredField field is required."]
   },
   "type": "https://httpstatuses.com/400",
-  "title": "One or more validation errors occurred.",
+  "title": "Error: Bad Request",
   "status": 400
 }
 ```
@@ -39,12 +39,14 @@ All response codes above `400` will have a nice JSON response, for example:
 ```json
 {
   "type": "https://httpstatuses.com/500",
-  "title": "Error 500",
-  "status": 500
+  "title": "Error: Internal Server Error",
+  "status": 500,
+  "exception": "System.Exception: Testing 500\n   at Sample.WebApi.Controllers.WeatherForecastController.Get(Int32 id) in /Users/hanneskarask/dev/ProblemDetails/samples/Sample.WebApi/Controllers/WeatherForecastController.cs:line 42\n   at lambda_method3(Closure , Object , Object[] )..."
 }
 ```
+*(exception is only visible when explicitly turned on, i.e. in dev environments)*
 
-You can also **override** the title values
+You can also **override** the title values and map **custom exceptions**.
 
 ## Getting started
 1. Install the [package](https://www.nuget.org/packages/ProblemDetails)
@@ -61,8 +63,7 @@ dotnet add package ProblemDetails
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddProblemDetails()
-      .MapStatusToTitle(500, "500, Oops!"); // optional overrides
+    services.AddProblemDetails();
 ```
 
 3. Call `app.UseProblemDetails()` in app Configure method:
@@ -70,7 +71,12 @@ public void ConfigureServices(IServiceCollection services)
 ```c#
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    app.UseProblemDetails();
+    app.UseProblemDetails(configure => configure
+        // Optional configuration
+        .MapStatusToTitle(HttpStatusCode.BadRequest, "One or more validation errors occurred")
+        .MapException<NotFoundException>(HttpStatusCode.NotFound)
+        .ShowErrorDetails(env.IsDevelopment())
+    );
 ```
 
 Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi) or browse [source](https://github.com/ProblemDetails/ProblemDetails) 

@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Shouldly;
 
-namespace ProblemDetails.IntegrationTests
+namespace Problem.Details.IntegrationTests
 {
     public static class HttpResponseExtensions
     {

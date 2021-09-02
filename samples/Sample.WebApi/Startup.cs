@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -8,16 +9,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using ProblemDetails;
+using Problem.Details;
 
 namespace Sample.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) =>
             Configuration = configuration;
-        }
 
         public IConfiguration Configuration { get; }
 
@@ -25,14 +24,13 @@ namespace Sample.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddProblemDetails()
-                .MapStatusToTitle(500, "500, Oops!");
-            
+            services.AddProblemDetails();
+
             services.AddControllers(options =>
                 {
                     options.ReturnHttpNotAcceptable = true;
                     options.RespectBrowserAcceptHeader = true;
-                    
+
                     options.Filters.Add(new ProducesAttribute(MediaTypeNames.Application.Json));
                     options.Filters.Add(new ConsumesAttribute(MediaTypeNames.Application.Json));
                 })
@@ -45,15 +43,19 @@ namespace Sample.WebApi
                 });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Sample.WebApi", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sample.WebApi", Version = "v1" });
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseProblemDetails();
-            
+            app.UseProblemDetails(configure => configure
+                .MapStatusToTitle(HttpStatusCode.BadRequest, "One or more validation errors occurred")
+                .MapException<NotFoundException>(HttpStatusCode.NotFound)
+                .ShowErrorDetails(env.IsDevelopment())
+            );
+
             if (env.IsDevelopment())
             {
                 // app.UseDeveloperExceptionPage();

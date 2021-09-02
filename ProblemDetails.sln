@@ -6,11 +6,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{93669F7B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{43860C5E-98B0-4EAF-B17C-952084E18B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemDetails", "src\ProblemDetails\ProblemDetails.csproj", "{99ED958D-159A-4938-9A39-53B01475C4CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem.Details", "src\Problem.Details\Problem.Details.csproj", "{99ED958D-159A-4938-9A39-53B01475C4CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.WebApi", "samples\Sample.WebApi\Sample.WebApi.csproj", "{7DE058D5-7264-419C-BCDD-06B438D18C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemDetails.IntegrationTests", "tests\ProblemDetails.IntegrationTests\ProblemDetails.IntegrationTests.csproj", "{842585FA-9534-4CA7-9F22-3B1D6736F5CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem.Details.IntegrationTests", "tests\Problem.Details.IntegrationTests\Problem.Details.IntegrationTests.csproj", "{842585FA-9534-4CA7-9F22-3B1D6736F5CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

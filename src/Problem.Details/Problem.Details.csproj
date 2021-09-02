@@ -4,8 +4,7 @@
         <LangVersion>9.0</LangVersion>
         <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <AssemblyName>ProblemDetails</AssemblyName>
-        <PackageId>ProblemDetails</PackageId>
+        <PackageId>Problem.Details</PackageId>
         <PackageProjectUrl>https://github.com/ProblemDetails/ProblemDetails</PackageProjectUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <IncludeSymbols>true</IncludeSymbols>

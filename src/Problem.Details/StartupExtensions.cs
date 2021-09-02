@@ -1,24 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace ProblemDetails
+namespace Problem.Details
 {
     public class ConfigureProblemDetails
     {
-        public ConfigureProblemDetails MapStatusToTitle(int statusCode, string title)
+        public ConfigureProblemDetails MapStatusToTitle(HttpStatusCode code, string title)
         {
-            Details.MapStatusToTitle(statusCode, title);
+            DetailsHelper.MapStatusToTitle(code, title);
+            return this;
+        }
+
+        /// <summary>
+        /// Map you custom exception against a <see cref="HttpStatusCode"/>
+        /// </summary>
+        public ConfigureProblemDetails MapException<TException>(HttpStatusCode code)
+            where TException: Exception
+        {
+            DetailsHelper.MapException<TException>(code);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds detailed exception to <see cref="ProblemDetails"/> extensions list.
+        /// Not recommended for production
+        /// <remarks>default: false</remarks>
+        /// </summary>
+        public ConfigureProblemDetails ShowErrorDetails(bool show)
+        {
+            DetailsHelper.SetShowErrorDetails(show);
             return this;
         }
     }
-    
+
     public static class StartupExtensions
     {
-        public static ConfigureProblemDetails AddProblemDetails(this IServiceCollection services)
+        public static IServiceCollection AddProblemDetails(this IServiceCollection services)
         {
             services.AddControllers(options =>
                 {
@@ -28,21 +50,24 @@ namespace ProblemDetails
                 {
                     options.InvalidModelStateResponseFactory = context =>
                     {
-                        Dictionary<string, IEnumerable<string>> errors = context.ModelState.ToDictionary(
+                        var errors = context.ModelState.ToDictionary(
                             k => k.Key,
-                            v => v.Value.Errors
-                                .Select(e => e.ErrorMessage));
-                        
+                            v => v.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                        );
+
                         throw new ModelValidationException(errors);
                     };
                 });
-            
+
             services.TryAddSingleton<ProblemDetailsMarkerService, ProblemDetailsMarkerService>();
-            return new ConfigureProblemDetails();
+            return services;
         }
-        
-        public static IApplicationBuilder UseProblemDetails(this IApplicationBuilder app)
+
+        public static IApplicationBuilder UseProblemDetails(this IApplicationBuilder app, Action<ConfigureProblemDetails> configure = null)
         {
+            var configurator = new ConfigureProblemDetails();
+            configure?.Invoke(configurator);
+
             var markerService = app.ApplicationServices.GetService<ProblemDetailsMarkerService>();
 
             if (markerService is null)
@@ -53,7 +78,7 @@ namespace ProblemDetails
 
             return app.UseMiddleware<ErrorHandlingMiddleware>();
         }
-        
+
         /// <summary>
         /// A marker class used to determine if the required services were added
         /// to the <see cref="IServiceCollection"/> before the middleware is configured.
