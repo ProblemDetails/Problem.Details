@@ -3,7 +3,7 @@
 [![Build](https://github.com/ProblemDetails/ProblemDetails/actions/workflows/build.yml/badge.svg)](https://github.com/ProblemDetails/ProblemDetails/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ProblemDetails_ProblemDetails&metric=alert_status)](https://sonarcloud.io/dashboard?id=ProblemDetails_ProblemDetails)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ProblemDetails_ProblemDetails&metric=coverage)](https://sonarcloud.io/dashboard?id=ProblemDetails_ProblemDetails)
-[![NuGet](https://img.shields.io/nuget/vpre/ProblemDetails.svg)](https://www.nuget.org/packages/ProblemDetails) 
+[![NuGet](https://img.shields.io/nuget/vpre/Problem.Details.svg)](https://www.nuget.org/packages/Problem.Details) 
 
 
 ## Problem
@@ -41,7 +41,7 @@ All response codes above `400` will have a nice JSON response, for example:
   "type": "https://httpstatuses.com/500",
   "title": "Error: Internal Server Error",
   "status": 500,
-  "exception": "System.Exception: Testing 500\n   at Sample.WebApi.Controllers.WeatherForecastController.Get(Int32 id) in /Users/hanneskarask/dev/ProblemDetails/samples/Sample.WebApi/Controllers/WeatherForecastController.cs:line 42\n   at lambda_method3(Closure , Object , Object[] )..."
+  "exception": "System.Exception: Testing 500\n   at Sample.WebApi.Controllers.WeatherForecastController.Get(Int32 id) in /Users/hanneskarask/dev/Problem.Details/samples/Sample.WebApi/Controllers/WeatherForecastController.cs:line 42\n   at lambda_method3(Closure , Object , Object[] )..."
 }
 ```
 *(exception is only visible when explicitly turned on, i.e. in dev environments)*
@@ -49,13 +49,13 @@ All response codes above `400` will have a nice JSON response, for example:
 You can also **override** the title values and map **custom exceptions**.
 
 ## Getting started
-1. Install the [package](https://www.nuget.org/packages/ProblemDetails)
+1. Install the [package](https://www.nuget.org/packages/Problem.Details)
 ```sh
-Install-Package ProblemDetails
+Install-Package Problem.Details
 ```
 Or via the .NET Core command line interface:
 ```sh
-dotnet add package ProblemDetails
+dotnet add package Problem.Details
 ```
 
 2. Call `services.AddProblemDetails()` in services configure method:
@@ -81,4 +81,4 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     );
 ```
 
-Check the [sample project](https://github.com/ProblemDetails/ProblemDetails/tree/main/samples/Sample.WebApi) or browse [source](https://github.com/ProblemDetails/ProblemDetails) 
+Check the [sample project](https://github.com/Problem.Details/Problem.Details/tree/main/samples/Sample.WebApi) or browse [source](https://github.com/Problem.Details/Problem.Details) 
